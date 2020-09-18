@@ -1,22 +1,11 @@
 import * as React from 'react';
-import { Button } from 'office-ui-fabric-react';
-import {insertValueInCell} from '../commands/commands';
-
-const onClickFromDialogue = () => {
-        const res = 'From Dialogue';
-        Office.context.ui.messageParent(JSON.stringify({res}));
-}
-
-const onClickFromTaskPane = () => {
-    insertValueInCell('From TaskPane')
-}
+import { Button, ButtonType } from 'office-ui-fabric-react';
+import { connectService } from '../../utilities/office-apis-helpers';
 
 const ConnectButton = () =>
             <div className='ms-welcome'>
                 <div className='ms-welcome__main'>
-                    <Button onClick={onClickFromDialogue}>Insert from dialogue</Button>
-                    <br />
-                    <Button onClick={onClickFromTaskPane}>Insert from taskpane</Button>
+                    <Button className='ms-welcome__action' buttonType={ButtonType.hero} iconProps={{ iconName: 'ChevronRight' }} onClick={connectService}>Connect to service</Button>
                 </div>
             </div>;
 
