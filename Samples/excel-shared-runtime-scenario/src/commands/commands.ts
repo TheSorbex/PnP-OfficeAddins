@@ -28,6 +28,42 @@ g.btnclosetaskpane = btnCloseTaskpane;
 g.btnconnectservice = btnConnectService;
 g.btndisconnectservice = btnDisconnectService;
 g.btnsumdata = btnSumData;
+g.openDialogueModal = openDialogueModal;
+
+type Params = {
+  row: number;
+  column: number;
+  range: Excel.Range;
+}
+const setNextActiveCell = ({row = 0, column = 0, range}: Params) => {
+  if (row || column) {
+      if (range) {
+          const cell = range.getCell(row, column);
+          cell.select();
+      }
+  }
+};
+const processMessage = (arg) => {
+  const message: any = JSON.parse(arg.message);
+    return Excel.run(async context => {
+      const range = context.workbook.getSelectedRange();
+      range.values = [[message.res]]
+      setNextActiveCell({row: 1, column: 0, range});
+      return context.sync();
+  });
+} 
+export function openDialogueModal(event: Office.AddinCommands.Event) {
+    Office.context.ui.displayDialogAsync('https://localhost:3000', {
+        displayInIframe: true,
+        height: 40,
+        width: 20,
+        promptBeforeOpen: false
+    }, asyncResult => {
+        const dialog = asyncResult.value;
+        dialog.addEventHandler(Office.EventType.DialogMessageReceived, processMessage);
+    });
+    event.completed();
+};
 
 export function btnConnectService(event: Office.AddinCommands.Event) {
   console.log('Connect service button pressed');

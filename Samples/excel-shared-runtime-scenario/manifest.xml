@@ -217,6 +217,25 @@
 									<bt:Image size="32" resid="Icon.32x32"/>
 									<bt:Image size="80" resid="Icon.80x80"/>
 								</Icon>
+								<Control xsi:type="Button" id="dialogue">
+									<Label resid="dialogue.Label" />
+									<Supertip>
+										<!-- ToolTip title. resid must point to a ShortString resource. -->
+										<Title resid="dialogue.Label" />
+										<!-- ToolTip description. resid must point to a LongString resource. -->
+										<Description resid="dialogue.Tooltip" />
+									</Supertip>
+									<Icon>
+										<bt:Image size="16" resid="Icon.16x16"/>
+										<bt:Image size="32" resid="Icon.32x32"/>
+										<bt:Image size="80" resid="Icon.80x80"/>
+									</Icon>
+									<!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
+									<Action xsi:type="ExecuteFunction">
+										<FunctionName>openDialogueModal</FunctionName>
+									</Action>
+									
+								</Control>
 								<Control xsi:type="Button" id="BtnOpenTaskpane">
 									<Label resid="BtnOpenTaskpane.Label" />
 									<Supertip>
@@ -300,6 +319,7 @@
 				<bt:String id="BtnCloseTaskpane.Label" DefaultValue="Close task pane"/>
 				<bt:String id="BtnSyncData.Label" DefaultValue="Sync data"/>
 				<bt:String id="BtnSumData.Label" DefaultValue="Sum"/>
+				<bt:String id="dialogue.Label" DefaultValue="Dialogue"/>
 			</bt:ShortStrings>
 			<!-- LongStrings max characters==250. -->
 			<bt:LongStrings>
@@ -314,6 +334,7 @@
 				<bt:String id="BtnCloseTaskpane.Tooltip" DefaultValue="Close the task pane"/>
 				<bt:String id="BtnSyncData.Tooltip" DefaultValue="Sync changes to source data"/>
 				<bt:String id="BtnSumData.Tooltip" DefaultValue="Sum selected data"/>
+				<bt:String id="dialogue.Tooltip" DefaultValue="dialogue"/>
 			</bt:LongStrings>
 		</Resources>
 	</VersionOverrides>
